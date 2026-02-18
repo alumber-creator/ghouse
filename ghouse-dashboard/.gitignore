@@ -1,0 +1,36 @@
+# Frontend артефакты сборки
+dist/
+build/
+
+# Node modules
+node_modules/
+
+# Логи
+npm-debug.log
+yarn-error.log
+lerna-debug.log
+
+# Переменные окружения
+.env
+.env.local
+.env.*.local
+
+# Кэш
+.cache/
+.parcel-cache/
+
+# Тесты
+coverage/
+
+# Временные файлы
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

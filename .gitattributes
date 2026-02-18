@@ -1,0 +1,59 @@
+# Нормализация окончаний строк
+# https://help.github.com/articles/dealing-with-line-endings/
+
+# Windows
+*.bat eol=crlf
+*.cmd eol=crlf
+
+# Unix/Linux/macOS
+*.sh eol=lf
+*.bash eol=lf
+
+# Текстовые файлы
+*.txt eol=lf
+*.md eol=lf
+*.rst eol=lf
+*.html eol=lf
+*.css eol=lf
+*.js eol=lf
+*.json eol=lf
+*.yaml eol=lf
+*.yml eol=lf
+*.xml eol=lf
+*.toml eol=lf
+*.ini eol=lf
+*.env eol=lf
+*.sql eol=lf
+*.py eol=lf
+*.ts eol=lf
+*.tsx eol=lf
+*.jsx eol=lf
+*.vue eol=lf
+*.svelte eol=lf
+
+# Скрипты
+*.ps1 eol=crlf
+Makefile eol=lf
+
+# Конфигурационные файлы
+.gitignore text
+.gitattributes text
+.editorconfig text
+Dockerfile text
+docker-compose*.yml text
+
+# Бинарные файлы (без нормализации)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary

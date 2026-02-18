@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHouse | Автономный Агрокомплекс</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/widgets.css">
+</head>
+<body>
+    <!-- Боковая навигация -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">🌿</span>
+            <span class="logo-text">GHouse</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Дашборд</span>
+            </a>
+            <a href="#greenhouse" class="nav-item" data-section="greenhouse">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Теплица</span>
+            </a>
+            <a href="#air" class="nav-item" data-section="air">
+                <span class="nav-icon">💨</span>
+                <span class="nav-label">Воздух</span>
+            </a>
+            <a href="#drones" class="nav-item" data-section="drones">
+                <span class="nav-icon">🚁</span>
+                <span class="nav-label">Дроны</span>
+            </a>
+            <a href="#conveyor" class="nav-item" data-section="conveyor">
+                <span class="nav-icon">🔄</span>
+                <span class="nav-label">Конвейер</span>
+            </a>
+            <a href="#soil" class="nav-item" data-section="soil">
+                <span class="nav-icon">🌱</span>
+                <span class="nav-label">Почва</span>
+            </a>
+            <a href="#telegram" class="nav-item" data-section="telegram">
+                <span class="nav-icon">📱</span>
+                <span class="nav-label">Telegram</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="system-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">Система активна</span>
+            </div>
+            <button id="logoutBtn" class="logout-btn" title="Выйти">
+                <span class="logout-icon">🚪</span>
+                <span class="logout-label">Выйти</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- Верхняя панель -->
+        <header class="top-bar">
+            <div class="header-left">
+                <h1 class="page-title">Панель управления</h1>
+                <p class="current-time" id="currentTime">--:--:--</p>
+            </div>
+            <div class="header-right">
+                <div class="notification-bell" id="notificationBell">
+                    <span class="bell-icon">🔔</span>
+                    <span class="notification-badge" id="notificationBadge">0</span>
+                </div>
+                <div class="user-profile">
+                    <span class="user-name">Оператор</span>
+                    <span class="user-avatar">👤</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Секция: Дашборд -->
+        <section id="dashboard" class="content-section active">
+            <div class="dashboard-grid">
+                <!-- Краткая сводка -->
+                <div class="card summary-card">
+                    <div class="card-header">
+                        <h3>📈 Сводка</h3>
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-icon">🌡️</span>
+                            <div class="summary-info">
+                                <span class="summary-value" id="summaryTemp">24°C</span>
+                                <span class="summary-label">Температура</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-icon">💧</span>
+                            <div class="summary-info">
+                                <span class="summary-value" id="summaryHumidity">65%</span>
+                                <span class="summary-label">Влажность</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-icon">🔋</span>
+                            <div class="summary-info">
+                                <span class="summary-value" id="summaryBattery">87%</span>
+                                <span class="summary-label">Батареи дронов</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-icon">✅</span>
+                            <div class="summary-info">
+                                <span class="summary-value" id="summaryStatus">OK</span>
+                                <span class="summary-label">Статус системы</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видеонаблюдение -->
+                <div class="card video-card">
+                    <div class="card-header">
+                        <h3>📹 Видеонаблюдение</h3>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+                    <div class="video-container" id="videoFeed">
+                        <div class="video-placeholder">
+                            <span class="video-icon">📷</span>
+                            <span class="video-text">Видеопоток теплицы</span>
+                        </div>
+                    </div>
+                    <div class="video-controls">
+                        <button class="btn-icon" title="Камера 1">📷1</button>
+                        <button class="btn-icon" title="Камера 2">📷2</button>
+                        <button class="btn-icon" title="Камера 3">📷3</button>
+                        <button class="btn-icon" title="Полноэкранный">⛶</button>
+                    </div>
+                </div>
+
+                <!-- Теплица -->
+                <div class="card greenhouse-card">
+                    <div class="card-header">
+                        <h3>🏠 Умная теплица</h3>
+                    </div>
+                    <div class="greenhouse-controls">
+                        <div class="control-item">
+                            <div class="control-header">
+                                <span>💧 Полив</span>
+                                <span class="status-badge" id="wateringStatus">Активно</span>
+                            </div>
+                            <div class="control-slider">
+                                <input type="range" id="wateringSlider" min="0" max="100" value="65">
+                                <span class="slider-value">65%</span>
+                            </div>
+                        </div>
+                        <div class="control-item">
+                            <div class="control-header">
+                                <span>💡 Освещение</span>
+                                <span class="status-badge" id="lightStatus">Активно</span>
+                            </div>
+                            <div class="control-slider">
+                                <input type="range" id="lightSlider" min="0" max="100" value="80">
+                                <span class="slider-value">80%</span>
+                            </div>
+                        </div>
+                        <div class="control-item">
+                            <div class="control-header">
+                                <span>💨 Вентиляция</span>
+                                <span class="status-badge" id="ventStatus">Активно</span>
+                            </div>
+                            <div class="control-slider">
+                                <input type="range" id="ventSlider" min="0" max="100" value="45">
+                                <span class="slider-value">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Дроны -->
+                <div class="card drones-card">
+                    <div class="card-header">
+                        <h3>🚁 Состояние дронов</h3>
+                    </div>
+                    <div class="drones-status" id="dronesStatus">
+                        <div class="drone-item">
+                            <div class="drone-header">
+                                <span class="drone-name">Дрон #1</span>
+                                <span class="drone-module">Захват</span>
+                            </div>
+                            <div class="drone-info">
+                                <span class="battery-level" style="--battery: 87">87%</span>
+                                <span class="drone-gps">GPS: 55.75, 37.61</span>
+                            </div>
+                            <div class="drone-progress">
+                                <div class="progress-bar" style="width: 87%"></div>
+                            </div>
+                        </div>
+                        <div class="drone-item">
+                            <div class="drone-header">
+                                <span class="drone-name">Дрон #2</span>
+                                <span class="drone-module">Орошение</span>
+                            </div>
+                            <div class="drone-info">
+                                <span class="battery-level" style="--battery: 62">62%</span>
+                                <span class="drone-gps">GPS: 55.76, 37.62</span>
+                            </div>
+                            <div class="drone-progress">
+                                <div class="progress-bar" style="width: 62%"></div>
+                            </div>
+                        </div>
+                        <div class="drone-item">
+                            <div class="drone-header">
+                                <span class="drone-name">Дрон #3</span>
+                                <span class="drone-module">Зарядка</span>
+                            </div>
+                            <div class="drone-info">
+                                <span class="battery-level" style="--battery: 23">23%</span>
+                                <span class="drone-gps">Станция</span>
+                            </div>
+                            <div class="drone-progress">
+                                <div class="progress-bar" style="width: 23%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Конвейер -->
+                <div class="card conveyor-card">
+                    <div class="card-header">
+                        <h3>🔄 Конвейер</h3>
+                        <span class="status-badge active" id="conveyorStatus">Работает</span>
+                    </div>
+                    <div class="conveyor-visual">
+                        <div class="conveyor-belt">
+                            <div class="conveyor-items">
+                                <span class="conveyor-item" style="left: 10%">📦</span>
+                                <span class="conveyor-item" style="left: 40%">📦</span>
+                                <span class="conveyor-item" style="left: 70%">📦</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conveyor-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="conveyorSpeed">1.2 м/с</span>
+                            <span class="stat-label">Скорость</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="conveyorLoad">45%</span>
+                            <span class="stat-label">Загрузка</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="conveyorItems">124</span>
+                            <span class="stat-label">Единиц</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Почва -->
+                <div class="card soil-card">
+                    <div class="card-header">
+                        <h3>🌱 Аналитика почвы</h3>
+                    </div>
+                    <div class="soil-metrics">
+                        <div class="soil-metric">
+                            <div class="metric-circle" data-value="78">
+                                <svg viewBox="0 0 36 36">
+                                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="circle" stroke-dasharray="78, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                </svg>
+                                <span class="metric-value">78%</span>
+                            </div>
+                            <span class="metric-label">Влажность</span>
+                        </div>
+                        <div class="soil-metric">
+                            <div class="metric-circle" data-value="65">
+                                <svg viewBox="0 0 36 36">
+                                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="circle" stroke-dasharray="65, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                </svg>
+                                <span class="metric-value">6.5</span>
+                            </div>
+                            <span class="metric-label">pH</span>
+                        </div>
+                        <div class="soil-metric">
+                            <div class="metric-circle" data-value="92">
+                                <svg viewBox="0 0 36 36">
+                                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="circle" stroke-dasharray="92, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                </svg>
+                                <span class="metric-value">92%</span>
+                            </div>
+                            <span class="metric-label">NPK</span>
+                        </div>
+                    </div>
+                    <div class="soil-details">
+                        <button class="btn-primary" id="analyzeSoilBtn">🔬 Анализировать</button>
+                    </div>
+                </div>
+
+                <!-- Telegram -->
+                <div class="card telegram-card">
+                    <div class="card-header">
+                        <h3>📱 Telegram Бот</h3>
+                        <span class="status-badge connected" id="telegramStatus">Подключен</span>
+                    </div>
+                    <div class="telegram-info">
+                        <div class="bot-status">
+                            <span class="bot-icon">🤖</span>
+                            <div class="bot-details">
+                                <span class="bot-name">@GHouse_Bot</span>
+                                <span class="bot-uptime">В сети: 24ч 15м</span>
+                            </div>
+                        </div>
+                        <div class="telegram-stats">
+                            <div class="tg-stat">
+                                <span class="tg-stat-value">12</span>
+                                <span class="tg-stat-label">Уведомления</span>
+                            </div>
+                            <div class="tg-stat">
+                                <span class="tg-stat-value">3</span>
+                                <span class="tg-stat-label">Предупреждения</span>
+                            </div>
+                            <div class="tg-stat">
+                                <span class="tg-stat-value">0</span>
+                                <span class="tg-stat-label">Ошибки</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="telegram-actions">
+                        <button class="btn-secondary" id="testNotifyBtn">📤 Тест уведомления</button>
+                        <button class="btn-secondary" id="telegramSettingsBtn">⚙️ Настройки</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Мониторинг воздуха -->
+        <section id="air" class="content-section">
+            <div class="air-monitoring-grid">
+                <div class="card air-main-card">
+                    <div class="card-header">
+                        <h3>💨 Параметры воздуха</h3>
+                        <span class="status-badge ok" id="airStatus">В норме</span>
+                    </div>
+                    <div class="air-params">
+                        <div class="air-param-item">
+                            <div class="param-header">
+                                <span class="param-name">🌡️ Температура</span>
+                                <span class="param-value" id="airTemp">24.5°C</span>
+                            </div>
+                            <div class="param-indicator ok">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Норма</span>
+                            </div>
+                            <div class="param-range">
+                                <span class="range-min">18°C</span>
+                                <div class="range-bar">
+                                    <div class="range-fill" style="left: 65%"></div>
+                                </div>
+                                <span class="range-max">30°C</span>
+                            </div>
+                        </div>
+                        <div class="air-param-item">
+                            <div class="param-header">
+                                <span class="param-name">💧 Влажность</span>
+                                <span class="param-value" id="airHumidity">65%</span>
+                            </div>
+                            <div class="param-indicator ok">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Норма</span>
+                            </div>
+                            <div class="param-range">
+                                <span class="range-min">40%</span>
+                                <div class="range-bar">
+                                    <div class="range-fill" style="left: 62%"></div>
+                                </div>
+                                <span class="range-max">80%</span>
+                            </div>
+                        </div>
+                        <div class="air-param-item">
+                            <div class="param-header">
+                                <span class="param-name">🌬️ CO₂</span>
+                                <span class="param-value" id="airCO2">420 ppm</span>
+                            </div>
+                            <div class="param-indicator ok">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Норма</span>
+                            </div>
+                            <div class="param-range">
+                                <span class="range-min">300</span>
+                                <div class="range-bar">
+                                    <div class="range-fill" style="left: 35%"></div>
+                                </div>
+                                <span class="range-max">1000</span>
+                            </div>
+                        </div>
+                        <div class="air-param-item">
+                            <div class="param-header">
+                                <span class="param-name">⚡ Давление</span>
+                                <span class="param-value" id="airPressure">760 мм рт.ст.</span>
+                            </div>
+                            <div class="param-indicator ok">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Норма</span>
+                            </div>
+                            <div class="param-range">
+                                <span class="range-min">740</span>
+                                <div class="range-bar">
+                                    <div class="range-fill" style="left: 55%"></div>
+                                </div>
+                                <span class="range-max">780</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card air-chart-card">
+                    <div class="card-header">
+                        <h3>📊 График изменений</h3>
+                        <div class="chart-legend">
+                            <span class="legend-item"><span class="legend-color temp"></span> Температура</span>
+                            <span class="legend-item"><span class="legend-color humidity"></span> Влажность</span>
+                        </div>
+                    </div>
+                    <div class="chart-container" id="airChart">
+                        <canvas id="airChartCanvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="card alerts-card">
+                    <div class="card-header">
+                        <h3>⚠️ Алерты</h3>
+                        <span class="alert-count" id="alertCount">0</span>
+                    </div>
+                    <div class="alerts-list" id="alertsList">
+                        <div class="alert-empty">
+                            <span class="alert-empty-icon">✅</span>
+                            <span class="alert-empty-text">Нет активных алертов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Дроны (детальная) -->
+        <section id="drones" class="content-section">
+            <div class="drones-detail-grid">
+                <div class="card drone-detail-card">
+                    <div class="card-header">
+                        <h3>🚁 Детальная информация о дронах</h3>
+                    </div>
+                    <div class="drone-detail-list" id="droneDetailList">
+                        <!-- Дроны будут добавлены через JS -->
+                    </div>
+                </div>
+
+                <div class="card charging-station-card">
+                    <div class="card-header">
+                        <h3>🔌 Зарядная станция</h3>
+                    </div>
+                    <div class="charging-slots">
+                        <div class="charging-slot occupied">
+                            <span class="slot-icon">🔋</span>
+                            <span class="slot-status">Занято</span>
+                            <span class="slot-charge">23%</span>
+                        </div>
+                        <div class="charging-slot free">
+                            <span class="slot-icon">➖</span>
+                            <span class="slot-status">Свободно</span>
+                        </div>
+                        <div class="charging-slot free">
+                            <span class="slot-icon">➖</span>
+                            <span class="slot-status">Свободно</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card module-station-card">
+                    <div class="card-header">
+                        <h3>🔧 Станция смены модулей</h3>
+                    </div>
+                    <div class="module-options">
+                        <button class="module-btn" data-module="grab">
+                            <span class="module-icon">🤖</span>
+                            <span class="module-name">Захват</span>
+                        </button>
+                        <button class="module-btn" data-module="spray">
+                            <span class="module-icon">💦</span>
+                            <span class="module-name">Орошение</span>
+                        </button>
+                        <button class="module-btn" data-module="soil">
+                            <span class="module-icon">🌱</span>
+                            <span class="module-name">Забор почвы</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Конвейер (детальный) -->
+        <section id="conveyor" class="content-section">
+            <div class="conveyor-detail-grid">
+                <div class="card conveyor-main-card">
+                    <div class="card-header">
+                        <h3>🔄 Управление конвейером</h3>
+                        <div class="conveyor-controls">
+                            <button class="btn-control" id="conveyorStart">▶️ Старт</button>
+                            <button class="btn-control" id="conveyorStop">⏹️ Стоп</button>
+                            <button class="btn-control" id="conveyorReset">🔄 Сброс</button>
+                        </div>
+                    </div>
+                    <div class="conveyor-visual-large">
+                        <div class="conveyor-belt-large">
+                            <div class="conveyor-items-large" id="conveyorItemsLarge">
+                                <!-- Items added via JS -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conveyor-settings">
+                        <div class="setting-item">
+                            <label>Скорость (м/с)</label>
+                            <input type="range" id="conveyorSpeedSlider" min="0.5" max="3" step="0.1" value="1.2">
+                            <span class="setting-value" id="conveyorSpeedValue">1.2</span>
+                        </div>
+                        <div class="setting-item">
+                            <label>Интервал (сек)</label>
+                            <input type="range" id="conveyorIntervalSlider" min="1" max="10" step="1" value="3">
+                            <span class="setting-value" id="conveyorIntervalValue">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card conveyor-stats-card">
+                    <div class="card-header">
+                        <h3>📊 Статистика</h3>
+                    </div>
+                    <div class="stats-detailed">
+                        <div class="stat-row">
+                            <span class="stat-label">Всего перевезено</span>
+                            <span class="stat-value" id="statTotal">1,247</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">За смену</span>
+                            <span class="stat-value" id="statShift">124</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Время работы</span>
+                            <span class="stat-value" id="statWorkTime">8ч 32м</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Эффективность</span>
+                            <span class="stat-value" id="statEfficiency">94%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Почва (детальная) -->
+        <section id="soil" class="content-section">
+            <div class="soil-detail-grid">
+                <div class="card soil-analysis-card">
+                    <div class="card-header">
+                        <h3>🔬 Детальный анализ почвы</h3>
+                    </div>
+                    <div class="soil-detailed-metrics">
+                        <div class="detailed-metric">
+                            <div class="metric-header">
+                                <span class="metric-icon">💧</span>
+                                <span class="metric-title">Влажность почвы</span>
+                            </div>
+                            <div class="metric-content">
+                                <span class="big-value">78%</span>
+                                <div class="mini-chart" id="moistureChart"></div>
+                            </div>
+                        </div>
+                        <div class="detailed-metric">
+                            <div class="metric-header">
+                                <span class="metric-icon">🧪</span>
+                                <span class="metric-title">pH уровень</span>
+                            </div>
+                            <div class="metric-content">
+                                <span class="big-value">6.5</span>
+                                <div class="ph-scale">
+                                    <div class="ph-bar">
+                                        <div class="ph-indicator" style="left: 65%"></div>
+                                    </div>
+                                    <span class="ph-label">Кислая → Нейтральная → Щелочная</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detailed-metric">
+                            <div class="metric-header">
+                                <span class="metric-icon">🌿</span>
+                                <span class="metric-title">NPK (Азот-Фосфор-Калий)</span>
+                            </div>
+                            <div class="metric-content npk-bars">
+                                <div class="npk-item">
+                                    <span class="npk-label">N</span>
+                                    <div class="npk-bar"><div class="npk-fill" style="width: 85%"></div></div>
+                                    <span class="npk-value">85%</span>
+                                </div>
+                                <div class="npk-item">
+                                    <span class="npk-label">P</span>
+                                    <div class="npk-bar"><div class="npk-fill" style="width: 72%"></div></div>
+                                    <span class="npk-value">72%</span>
+                                </div>
+                                <div class="npk-item">
+                                    <span class="npk-label">K</span>
+                                    <div class="npk-bar"><div class="npk-fill" style="width: 92%"></div></div>
+                                    <span class="npk-value">92%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card soil-history-card">
+                    <div class="card-header">
+                        <h3>📜 История анализов</h3>
+                    </div>
+                    <div class="history-list" id="soilHistoryList">
+                        <div class="history-item">
+                            <span class="history-date">Сегодня, 10:30</span>
+                            <span class="history-result">✅ Норма</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-date">Вчера, 14:15</span>
+                            <span class="history-result">✅ Норма</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-date">16.02, 09:00</span>
+                            <span class="history-result">⚠️ Требуется полив</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Telegram (детальная) -->
+        <section id="telegram" class="content-section">
+            <div class="telegram-detail-grid">
+                <div class="card telegram-settings-card">
+                    <div class="card-header">
+                        <h3>⚙️ Настройки Telegram</h3>
+                    </div>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label>Token бота</label>
+                            <input type="text" class="form-input" placeholder="Введите токен" id="telegramToken">
+                        </div>
+                        <div class="form-group">
+                            <label>Chat ID</label>
+                            <input type="text" class="form-input" placeholder="Введите Chat ID" id="telegramChatId">
+                        </div>
+                        <div class="form-group">
+                            <label>Частота уведомлений</label>
+                            <select class="form-select" id="notifyFrequency">
+                                <option value="immediate">Немедленно</option>
+                                <option value="5min">Каждые 5 минут</option>
+                                <option value="15min">Каждые 15 минут</option>
+                                <option value="hour">Каждый час</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Типы уведомлений</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" checked> Критические ошибки
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" checked> Предупреждения
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox"> Информационные
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox"> Отчеты
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="saveTelegramSettings">💾 Сохранить</button>
+                            <button class="btn-secondary" id="testTelegramConnection">📡 Тест связи</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card telegram-log-card">
+                    <div class="card-header">
+                        <h3>📋 Лог уведомлений</h3>
+                    </div>
+                    <div class="log-list" id="telegramLogList">
+                        <div class="log-item success">
+                            <span class="log-time">10:30:45</span>
+                            <span class="log-message">Система запущена</span>
+                        </div>
+                        <div class="log-item warning">
+                            <span class="log-time">09:15:22</span>
+                            <span class="log-message">Низкий заряд дрона #3</span>
+                        </div>
+                        <div class="log-item info">
+                            <span class="log-time">08:00:00</span>
+                            <span class="log-message">Ежедневный отчет отправлен</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно алертов -->
+    <div class="modal-overlay" id="alertModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>⚠️ Внимание</h3>
+                <button class="modal-close" id="closeAlertModal">&times;</button>
+            </div>
+            <div class="modal-body" id="alertModalBody">
+                <!-- Alert content -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="acknowledgeAlert">Понятно</button>
+                <button class="btn-primary" id="fixAlert">Исправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="js/modules/api.js"></script>
+    <script src="js/modules/auth.js"></script>
+    <script src="js/modules/websocket.js"></script>
+    <script src="js/modules/greenhouse.js"></script>
+    <script src="js/modules/air-monitoring.js"></script>
+    <script src="js/modules/drones.js"></script>
+    <script src="js/modules/conveyor.js"></script>
+    <script src="js/modules/soil.js"></script>
+    <script src="js/modules/telegram.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

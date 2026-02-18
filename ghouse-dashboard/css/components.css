@@ -1,0 +1,922 @@
+/* ========================================
+   GHouse Dashboard - Components
+   ======================================== */
+
+/* ========================================
+   Status Badges Extended
+   ======================================== */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* ========================================
+   Form Elements
+   ======================================== */
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+.form-input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-select {
+    cursor: pointer;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-green);
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* ========================================
+   Modal
+   ======================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    font-size: 1.2rem;
+    color: var(--status-warning);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+    color: var(--text-secondary);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ========================================
+   Alerts
+   ======================================== */
+
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.alert-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    color: var(--text-muted);
+}
+
+.alert-empty-icon {
+    font-size: 2rem;
+}
+
+.alert-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border-left: 3px solid;
+}
+
+.alert-item.critical {
+    border-left-color: var(--status-error);
+}
+
+.alert-item.warning {
+    border-left-color: var(--status-warning);
+}
+
+.alert-item.info {
+    border-left-color: var(--status-info);
+}
+
+.alert-icon {
+    font-size: 1.2rem;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.alert-message {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.alert-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.alert-count {
+    background: var(--status-error);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* ========================================
+   Air Monitoring Components
+   ======================================== */
+
+.air-monitoring-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.air-main-card {
+    grid-column: span 2;
+}
+
+.air-params {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.air-param-item {
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.param-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.param-name {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.param-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+
+.param-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.param-indicator.ok {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--status-success);
+}
+
+.param-indicator.warning {
+    background: rgba(255, 170, 0, 0.1);
+    color: var(--status-warning);
+}
+
+.param-indicator.error {
+    background: rgba(255, 68, 68, 0.1);
+    color: var(--status-error);
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.param-range {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.range-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-primary);
+    border-radius: 3px;
+    position: relative;
+}
+
+.range-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-green-light));
+    border-radius: 3px;
+}
+
+/* Chart Card */
+.air-chart-card {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.chart-legend {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-color.temp {
+    background: #ff6b6b;
+}
+
+.legend-color.humidity {
+    background: #4ecdc4;
+}
+
+.chart-container {
+    height: 300px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Alerts Card */
+.alerts-card {
+    grid-column: span 1;
+}
+
+/* ========================================
+   Drones Detail Section
+   ======================================== */
+
+.drones-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.drone-detail-card {
+    grid-column: span 2;
+}
+
+.drone-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.drone-detail-item {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.drone-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--bg-primary);
+}
+
+.drone-detail-body {
+    padding: var(--spacing-md);
+}
+
+.drone-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.drone-spec {
+    text-align: center;
+    padding: var(--spacing-sm);
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+}
+
+.drone-spec-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+
+.drone-spec-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.drone-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+/* Charging Station */
+.charging-station-card {
+    grid-column: span 1;
+}
+
+.charging-slots {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.charging-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--border-color);
+}
+
+.charging-slot.occupied {
+    border-style: solid;
+    border-color: var(--accent-green);
+}
+
+.slot-icon {
+    font-size: 2rem;
+}
+
+.slot-status {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.slot-charge {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+
+/* Module Station */
+.module-station-card {
+    grid-column: span 1;
+}
+
+.module-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.module-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.module-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-green);
+    color: var(--text-primary);
+}
+
+.module-btn.active {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.module-icon {
+    font-size: 1.5rem;
+}
+
+.module-name {
+    font-weight: 500;
+}
+
+/* ========================================
+   Conveyor Detail Section
+   ======================================== */
+
+.conveyor-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.conveyor-main-card {
+    grid-column: span 2;
+}
+
+.conveyor-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.btn-control {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-control:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-green);
+    color: var(--text-primary);
+}
+
+.conveyor-visual-large {
+    margin: var(--spacing-lg) 0;
+}
+
+.conveyor-belt-large {
+    background: linear-gradient(90deg, var(--bg-secondary), var(--bg-primary), var(--bg-secondary));
+    height: 100px;
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+}
+
+.conveyor-items-large {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    animation: conveyorMove 5s linear infinite;
+}
+
+@keyframes conveyorMove {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+.conveyor-item-large {
+    position: absolute;
+    font-size: 2.5rem;
+}
+
+.conveyor-settings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.setting-item label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.setting-item input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    background: var(--bg-primary);
+    border-radius: 3px;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.setting-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    text-align: right;
+}
+
+/* Conveyor Stats Card */
+.conveyor-stats-card {
+    grid-column: span 2;
+}
+
+.stats-detailed {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.stat-row .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.stat-row .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+
+/* ========================================
+   Soil Detail Section
+   ======================================== */
+
+.soil-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.soil-analysis-card {
+    grid-column: span 2;
+}
+
+.soil-detailed-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.detailed-metric {
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.metric-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.metric-icon {
+    font-size: 1.5rem;
+}
+
+.metric-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.metric-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.big-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+
+.mini-chart {
+    flex: 1;
+    height: 60px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+}
+
+/* pH Scale */
+.ph-scale {
+    flex: 1;
+}
+
+.ph-bar {
+    height: 20px;
+    background: linear-gradient(90deg, #ff4444, #ffff00, #00ff88, #4444ff);
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: var(--spacing-sm);
+}
+
+.ph-indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 28px;
+    background: white;
+    border: 2px solid var(--bg-card);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.ph-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* NPK Bars */
+.npk-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.npk-item {
+    display: grid;
+    grid-template-columns: 30px 1fr 50px;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.npk-label {
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.npk-bar {
+    height: 12px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.npk-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-green-light));
+    border-radius: 6px;
+    transition: width var(--transition-normal);
+}
+
+.npk-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    text-align: right;
+}
+
+/* Soil History */
+.soil-history-card {
+    grid-column: span 2;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.history-date {
+    color: var(--text-secondary);
+}
+
+.history-result {
+    font-weight: 600;
+}
+
+/* ========================================
+   Telegram Detail Section
+   ======================================== */
+
+.telegram-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.telegram-settings-card {
+    grid-column: span 1;
+}
+
+.telegram-log-card {
+    grid-column: span 1;
+}
+
+.log-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.log-item {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid;
+}
+
+.log-item.success {
+    border-left-color: var(--status-success);
+}
+
+.log-item.warning {
+    border-left-color: var(--status-warning);
+}
+
+.log-item.error {
+    border-left-color: var(--status-error);
+}
+
+.log-item.info {
+    border-left-color: var(--status-info);
+}
+
+.log-time {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.log-message {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
