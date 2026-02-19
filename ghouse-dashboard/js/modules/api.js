@@ -7,8 +7,8 @@
 const ApiClient = (function() {
     // Конфигурация
     const config = {
-        baseUrl: window.location.hostname === 'localhost' 
-            ? 'http://localhost:8000/api/v1' 
+        baseUrl: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8080/api/v1'
             : '/api/v1',
         timeout: 30000,
         retryAttempts: 3,
