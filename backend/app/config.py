@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     APP_PORT: int = 8000
     
     # База данных
-    DATABASE_URL: str = "postgresql://ghouse:ghouse_password@localhost:5432/ghouse"
+    DATABASE_URL: str = "postgresql+asyncpg://ghouse:ghouse_password@localhost:5432/ghouse"
     DATABASE_POOL_SIZE: int = 20
     DATABASE_MAX_OVERFLOW: int = 10
     

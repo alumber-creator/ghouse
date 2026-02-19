@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://ghouse:ghouse_password@db:5432/ghouse
+      - DATABASE_URL=postgresql+asyncpg://ghouse:ghouse_password@db:5432/ghouse
       - REDIS_URL=redis://redis:6379
       - MQTT_BROKER=mqtt
       - APP_ENV=development
