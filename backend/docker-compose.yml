@@ -13,6 +13,7 @@ services:
       - APP_DEBUG=true
       - JWT_SECRET_KEY=dev_secret_key_change_in_production
       - APP_SECRET_KEY=dev_secret_key_change_in_production
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8000,http://127.0.0.1:3000,http://127.0.0.1:8000,http://0.0.0.0:3000,http://0.0.0.0:8000
     depends_on:
       db:
         condition: service_healthy

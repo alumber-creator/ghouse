@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     MQTT_CLIENT_ID: str = "ghouse_backend"
     
     # CORS
-    CORS_ORIGINS: str = "http://localhost:8000,http://localhost:3000"
+    CORS_ORIGINS: str = "http://localhost:8000,http://localhost:3000,http://127.0.0.1:8000,http://127.0.0.1:3000,http://0.0.0.0:8000,http://0.0.0.0:3000"
     
     # Rate limiting
     RATE_LIMIT_REQUESTS: int = 100
