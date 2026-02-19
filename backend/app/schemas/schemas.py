@@ -1,10 +1,14 @@
 """
 Pydantic схемы для API
 """
+from __future__ import annotations
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, TYPE_CHECKING
 from datetime import datetime, date
 from enum import Enum
+
+if TYPE_CHECKING:
+    pass
 
 
 # ==================== Auth Schemas ====================
@@ -13,7 +17,7 @@ class Token(BaseModel):
     access_token: str
     refresh_token: str
     expires_in: int
-    user: Optional["UserResponse"] = None
+    user: Optional[UserResponse] = None
 
 
 class TokenData(BaseModel):
@@ -529,7 +533,3 @@ class WSResponse(BaseModel):
     channel: str
     timestamp: datetime
     payload: Dict[str, Any]
-
-
-# Обновление forward references
-UserResponse.model_rebuild()
