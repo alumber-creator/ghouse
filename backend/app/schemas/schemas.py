@@ -3,22 +3,12 @@ Pydantic схемы для API
 """
 from __future__ import annotations
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List, Dict, Any, TYPE_CHECKING
+from typing import Optional, List, Dict, Any
 from datetime import datetime, date
 from enum import Enum
 
-if TYPE_CHECKING:
-    pass
-
 
 # ==================== Auth Schemas ====================
-
-class Token(BaseModel):
-    access_token: str
-    refresh_token: str
-    expires_in: int
-    user: Optional[UserResponse] = None
-
 
 class TokenData(BaseModel):
     username: Optional[str] = None
@@ -83,9 +73,16 @@ class UserResponse(UserBase):
     is_active: bool
     created_at: datetime
     role: Optional[RoleResponse] = None
-    
+
     class Config:
         from_attributes = True
+
+
+class Token(BaseModel):
+    access_token: str
+    refresh_token: str
+    expires_in: int
+    user: Optional[UserResponse] = None
 
 
 # ==================== Greenhouse Schemas ====================
